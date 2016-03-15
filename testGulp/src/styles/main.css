@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+}
+.font {
+  font-family: 'Comic Sans MS', Helvetical, sans-serif;
+  font-size: 16px;
+}
+.content {
+  width: 1200px;
+  height: 700px;
+  margin: 0 auto;
+}
+.content .bg-container {
+  width: 1200px;
+  height: 700px;
+  position: absolute;
+}
+.content .bg-container img {
+  width: 100%;
+  height: 100%;
+}
+.content .contact-container {
+  position: absolute;
+  width: 1200px;
+  height: 80px;
+  margin: 0 auto;
+}
+.content .contact-container a {
+  text-decoration: none;
+}
+.content .contact-container a:hover {
+  color: #c07183;
+}
+.content .contact-container:after {
+  position: relative;
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+.content .contact-container .home {
+  position: relative;
+  left: 75px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.content .contact-container .contact {
+  position: relative;
+  left: 975px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.content .watch-container {
+  position: absolute;
+  top: 405px;
+  width: 1200px;
+  height: 200px;
+  left: 50%;
+  margin-left: -600px;
+  overflow: hidden;
+}
+.content .watch-container .watch {
+  position: absolute;
+  width: 2400px;
+  height: 200px;
+  overflow: hidden;
+}
+.content .watch-container .watch:after {
+  position: relative;
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+.content .watch-container .watch div {
+  text-align: center;
+  max-width: 150px;
+  max-height: 171px;
+  display: inline-block;
+  background-color: #ffffff;
+  -webkit-border-radius: 20px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 20px;
+  -moz-background-clip: padding;
+  border-radius: 20px;
+  background-clip: padding-box;
+  margin: 16px 25px;
+  vertical-align: middle;
+}
+.content .watch-container .watch div:hover {
+  -webkit-box-shadow: 0 0 20px #ff0000;
+  -moz-box-shadow: 0 0 20px #ff0000;
+  box-shadow: 0 0 20px #ff0000;
+}
+.content .watch-container .watch div:hover img {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.content .watch-container .watch img {
+  width: 100%;
+  zoom: 1;
+  filter: alpha(opacity=80);
+  -webkit-opacity: 0.8;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  -webkit-border-radius: 20px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 20px;
+  -moz-background-clip: padding;
+  border-radius: 20px;
+  background-clip: padding-box;
+}
+/*# sourceMappingURL=style.css.map */
