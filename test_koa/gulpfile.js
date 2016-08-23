@@ -1,20 +1,20 @@
-var gulp = require('gulp');
-var postcss = require('gulp-postcss');
-var sourcemaps = require('gulp-sourcemaps');
-// var sass = require('gulp-sass');
-// var compass = require( 'gulp-for-compass' );
-var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
-var cssnext = require('cssnext');
-var precss = require('precss');
-var rename = require('gulp-rename');
+const gulp = require('gulp');
+const postcss = require('gulp-postcss');
+const sourcemaps = require('gulp-sourcemaps');
+// const sass = require('gulp-sass');
+// const compass = require( 'gulp-for-compass' );
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const cssnext = require('cssnext');
+const precss = require('precss');
+const rename = require('gulp-rename');
 
 gulp.task('css', function () {
-    var processors = [
+    const processors = [
         autoprefixer,
         cssnext,
         precss,
-        cssnano
+        // cssnano
     ];
     return gulp.src('./public/css/*.pcss')
         // .pipe(sass().on('error', sass.logError))

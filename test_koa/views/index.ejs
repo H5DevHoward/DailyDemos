@@ -1,0 +1,17 @@
+<p class="topic animated bounce">QUESTION: <%= q_index %></p>
+<div class="left-box">
+	<img class="thumbail animated rollIn" src="img/lufei.jpg" alt="">
+</div>
+<div class="right-box">
+	<p class="title animated zoomIn"><%= QAQ.Q %></p>
+	<% for(var i=0; i<QAQ.a.length; i++) {%>
+		<p class="choice multiple"><span><%= QAQ.a[i] %></span></p>
+	<% } %>
+</div>
+<div class="submit animated fadeInUp">
+	<% if (q_index == 2) { %>
+		SUBMIT
+	<% } else { %>
+		NEXT
+	<% } %>
+</div>
