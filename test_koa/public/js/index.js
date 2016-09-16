@@ -1,5 +1,5 @@
 function startAd() {
-    console.log('====== startAd ======');
+    console.log('=== startAd ===');
     $.fn.extend({
         animateCss: function(animationName) {
             var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
