@@ -1,5 +1,5 @@
 function startAd() {
-    console.log('=== startAd ===');
+    console.log('====== startAd ======');
     $.fn.extend({
         animateCss: function(animationName) {
             var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -53,7 +53,7 @@ function startAd() {
         $submit.removeClass('hover');
     }).on('click', function(){
         if($('.choice.active').length < 1) return;
-        
+
         $('.choice.active').each(function(i, item){
             var $this = $(item);
             var index = $choice.index(this);
