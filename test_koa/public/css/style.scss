@@ -1,0 +1,278 @@
+@import '_animate.min.css';
+@import '_common.css';
+
+$font_stack: Helvetica, sans-serif;
+$primary_color: #f3f3f3;
+
+$header_height: 156px;
+$container_height: 468px;
+$footer_height: 0px;
+
+$circle_color: #AA968A;
+$circle_font_color: #DBD0D0;
+$progress_color: #DBD3C9;
+
+$delayFadeIn: .8s .9s 1s;
+$choiceBtnBorderColor: #56CBF9;
+$choiceBtnFillColor: #81F4E1;
+
+@import url(https://fonts.googleapis.com/css?family=Boogaloo);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
+@function caculate($number){
+    @return 0.8 + (($number - 1) / 10);
+}
+
+@function strip-units($number){
+    @return $number / ($number * 0 + 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    border: 0;
+    color: #fff;
+}
+
+body,html {
+  font: 100% $font_stack;
+  background-color: $primary_color;
+  overflow: hidden;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.blur {
+    filter: url(blur.svg#blur);
+
+    -webkit-filter: blur(10px);
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);
+            filter: blur(10px);
+
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+}
+
+section {
+
+}
+
+.poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.header {
+    width: 100%;
+    height: $header_height;
+
+    .progress-wrapper {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        &:after {
+            content: '';
+            width: 96%;
+            height: 0.7vw;
+            display: inline-block;
+            position: absolute;
+            left: 50%;
+            margin-left: -48%;
+            background-color: $progress_color;
+        }
+
+        .circle {
+            width: 3.6vw;
+            height: 3.6vw;
+            background-color: $circle_color;
+            color: $circle_font_color;
+            border-radius: 50%;
+            font-size: 1.7vw;
+            line-height: 220%;
+            z-index: 1;
+
+            &.active {
+                background-color: $circle_font_color;
+                color: $circle_color;
+                border: 2px solid $circle_color;
+            }
+        }
+    }
+}
+
+.footer {
+    width: 100%;
+    height: $footer_height;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: $container_height;
+
+    .placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .2);
+        border-radius: 50px;
+    }
+
+    .welcome,.result {
+        text-align: center;
+        margin: 0 auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        span {
+            font-family: 'Boogaloo', cursive;
+            font-size: 72px;
+        }
+    }
+
+    .topic {
+        font-size: 36px;
+        text-align: center;
+    	margin-bottom: 50px;
+    }
+
+    .left-box {
+        width: 50%;
+        height: 100%;
+        display: inline-block;
+
+        .thumbail {
+            width: 30%;
+            animation-delay: .4s;
+        }
+    }
+
+    .right-box {
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    p {
+        font-size: 26px;
+        margin-top: 14px;
+    }
+
+    .title {
+        animation-delay: .6s;
+    }
+
+
+    /*@for $i from 2 to 4 {
+        .right-box {
+            p:nth-child($i) {
+                animation-delay: nth($delayFadeIn, $i-1);
+            }
+        }
+    }*/
+
+    .right-box {
+        /*@for $i from 2 to 4 {
+            p:nth-child($i) {
+                animation-delay: caculate($i);
+            }
+        }*/
+        /*p:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+        p:nth-child(3) {
+            animation-delay: 0.9s;
+        }
+        p:nth-child(4) {
+            animation-delay: 1s;
+        }*/
+
+        .choice {
+            visibility: hidden;
+            opacity: 0;
+
+            span {
+                font-size: 22px;
+            	cursor: pointer;
+                transition: font-size ease-in-out .3s;
+
+
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    position: relative;
+                    top: 2px;
+                    margin-right: 10px;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    border: 2px solid $choiceBtnBorderColor;
+                    transition: [width height background-color] ease-in-out .3s;
+                }
+            }
+
+            &.hover {
+                /*animation-duration: .8s;*/
+                animation-delay: 0s;
+                /*animation-iteration-count: infinite;*/
+            }
+
+            &.active span {
+                font-size: 30px;
+            }
+
+            &.active span:before {
+                width: 15px;
+                height: 15px;
+                background-color: $choiceBtnFillColor;
+            }
+        }
+    }
+}
+
+
+
+.submit,.start {
+    width: 120px;
+    height: 40px;
+    border: 2px solid $choiceBtnBorderColor;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    line-height: 44px;
+    background-color: $choiceBtnFillColor;
+    animation-delay: 1.2s;
+    transition: [border background-color] ease-in-out .3s;
+    position: absolute;
+    right: 5%;
+    bottom: 2%;
+
+    /*animation-duration: .8s;*/
+    animation-delay: 0.5s;
+    /*animation-iteration-count: infinite;*/
+
+    &.hover {
+        border: 2px solid $choiceBtnFillColor;
+        background-color: $choiceBtnBorderColor;
+    }
+}

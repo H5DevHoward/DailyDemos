@@ -16,7 +16,7 @@ gulp.task('css', function () {
         precss,
         // cssnano
     ];
-    return gulp.src('./public/css/*.pcss')
+    return gulp.src('./public/css/*.scss')
         // .pipe(sass().on('error', sass.logError))
         // .pipe(compass({
         //     sassDir: './public/css',

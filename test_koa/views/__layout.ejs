@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>use koa</title>
+	<title>FPG HOWARD</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 	<script>
@@ -16,6 +16,10 @@
 		},{
 			cdn: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js',
 			local: 'js/jquery.min.js'
+		}, {
+			local: 'js/ejs.min.js'
+		}, {
+			local: 'js/common.js'
 		}, {
 			local: 'js/index.js'
 		}];
@@ -53,11 +57,20 @@
 </head>
 
 <body>
-	<div class="header"></div>
-	<div class="container">
-		<%- body %>
-	</div>
-	<div class="footer"></div>
+	<section>
+		<div class="poster preload" data-source=<%= otherAccess.poster %>></div>
+
+		<div class="header">
+			<% include header.ejs %>
+		</div>
+		<div class="container">
+			<div class="placeholder blur"></div>
+			<%- body %>
+		</div>
+		<div class="footer">
+			<% include footer.ejs %>
+		</div>
+	</section>
 </body>
 
 </html>

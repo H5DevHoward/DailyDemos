@@ -1,0 +1,11 @@
+<div class="progress-wrapper">
+    <% for(var i=0; i<5; i++) {%>
+		<div
+        <% if (i == otherAccess.qIndex) { %>
+            class="circle active"
+        <% } else { %>
+            class="circle"
+        <% } %>
+        ><%= i %></div>
+	<% } %>
+</div>

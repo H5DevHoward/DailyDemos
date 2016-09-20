@@ -1,5 +1,7 @@
 function startAd() {
     console.log('=== startAd ===');
+    HW_CM.preloadImgs(selector, done);
+
     $.fn.extend({
         animateCss: function(animationName) {
             var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -8,6 +10,7 @@ function startAd() {
             });
         }
     });
+
 
     var $topic = $('.topic');
     var $rightBox = $('.right-box');
@@ -20,12 +23,36 @@ function startAd() {
     var qIndex = parseInt($topic.text().split(':')[1]);
 
 
+    var $window = $(window);
+    var ww = $window.width();
+    var wh = $window.height();
+    resizeAd(ww, wh);
+
+    $window.on('resize', function() {
+        ww = $window.width();
+        wh = $window.height();
+
+        if (typeof resizeAd == 'function') {
+            resizeAd(ww, wh);
+        }
+    });
+    function resizeAd(width, height){
+        w = (width / height) < (1534 / 1022) ? height * (1534 / 1022) : width;
+        TweenMax.set([$('.poster')], {
+            width: w,
+            height: w / (1534 / 1022),
+            marginLeft: -(w - width) / 2,
+            marginTop: -(w / (1534 / 1022) - height) / 2
+        });
+    }
+
+    $start.animateCss('fadeInUp');
     $start.on('mouseenter', function(){
         $start.addClass('hover');
     }).on('mouseleave', function(){
         $start.removeClass('hover');
     }).on('click', function(){
-        location.href = '/q0';
+        location.href = '/q1';
     });
 
     // $choice.animateCss('fadeInDown');
@@ -61,8 +88,7 @@ function startAd() {
         });
 
         $.post(
-            '/save',
-            {
+            '/save', {
                 answer: answers,
                 qIndex: qIndex
             }
@@ -70,7 +96,7 @@ function startAd() {
         .done(function(data) {
             console.log('successed', data);
             // window.open('/q');
-            if(qIndex != 2) {
+            if(qIndex != 3) {
                 location.href = '/q'+(qIndex+1);
             }else {
                 location.href = '/result';

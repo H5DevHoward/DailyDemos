@@ -1,6 +1,6 @@
-<p class="topic animated bounce">QUESTION: <%= q_index %></p>
+<p class="topic animated bounce">QUESTION: <%= otherAccess.qIndex %></p>
 <div class="left-box">
-	<img class="thumbail animated rollIn" src="img/lufei.jpg" alt="">
+	<div class="thumbail animated rollIn preload" data-source="img/lufei.jpg"></div>
 </div>
 <div class="right-box">
 	<p class="title animated zoomIn"><%= QAQ.Q %></p>
@@ -9,7 +9,7 @@
 	<% } %>
 </div>
 <div class="submit animated fadeInUp">
-	<% if (q_index == 2) { %>
+	<% if (otherAccess.qIndex == 3) { %>
 		SUBMIT
 	<% } else { %>
 		NEXT

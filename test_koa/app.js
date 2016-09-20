@@ -22,6 +22,29 @@ const QAQ = {
     }]
 };
 
+const otherAccess = [
+    {
+        qIndex: 0,
+        poster: 'img/watch.jpeg'
+    },
+    {
+        qIndex: 1,
+        poster: 'img/lion.jpeg'
+    },
+    {
+        qIndex: 2,
+        poster: 'img/people.jpeg'
+    },
+    {
+        qIndex: 3,
+        poster: 'img/bridge.jpeg'
+    },
+    {
+        qIndex: 4,
+        poster: 'img/beach.jpeg'
+    }
+];
+
 const q_answer = new Map();
 
 app.use(serve(path.join(__dirname, 'public')));
@@ -39,29 +62,30 @@ render(app, {
 router
     .get('/', function*(next) {
         yield this.render('home', {
+            QAQ: QAQ.QAQ,
             start: 'start',
-            layout: '__layout'
-        });
-    })
-    .get('/q0', function*(next) {
-        yield this.render('index', {
-            // user: user,
-            QAQ: QAQ.QAQ[0],
-            q_index: 0,
+            otherAccess: otherAccess[0],
             layout: '__layout'
         });
     })
     .get('/q1', function*(next) {
         yield this.render('index', {
-            QAQ: QAQ.QAQ[1],
-            q_index: 1,
+            QAQ: QAQ.QAQ[0],
+            otherAccess: otherAccess[1],
             layout: '__layout'
         });
     })
     .get('/q2', function*(next) {
         yield this.render('index', {
+            QAQ: QAQ.QAQ[1],
+            otherAccess: otherAccess[2],
+            layout: '__layout'
+        });
+    })
+    .get('/q3', function*(next) {
+        yield this.render('index', {
             QAQ: QAQ.QAQ[2],
-            q_index: 2,
+            otherAccess: otherAccess[3],
             layout: '__layout'
         });
     })
@@ -74,7 +98,8 @@ router
         console.log(q_answer);
         yield this.render('result', {
             result: 'DONE!',
-            layout: false
+            otherAccess: otherAccess[4],
+            layout: '__layout'
         });
     })
     .get('/q', function*(next) {
@@ -83,20 +108,6 @@ router
             layout: false
         });
     })
-    // .get('/q', '/q/:id', function*(next) {
-    //     yield this.render('q', {
-    //         id: this.params.id,
-    //         layout: false
-    //     });
-    // })
-    // .post('/q', koaBody, function*(next) {
-    //     var params = this.request.body;
-    //     console.log(params);
-    //     yield this.render('q', {
-    //         answer: params.q1,
-    //         layout: false
-    //     });
-    // })
     .post('/save', koaBody, function*(next){
         let params = this.request.body;
         q_answer.set(params.qIndex, params.answer);
@@ -106,7 +117,7 @@ router
             layout: false
         });
     });
- 
+
 app.use(router.routes());
 
 onerror(app);

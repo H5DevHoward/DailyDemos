@@ -12,6 +12,7 @@
     "autoprefixer": "^6.3.7",
     "cssnano": "^3.7.3",
     "cssnext": "^1.8.4",
+    "ejs": "^2.5.2",
     "gulp": "^3.9.1",
     "gulp-for-compass": "0.0.2",
     "gulp-postcss": "^6.1.1",
