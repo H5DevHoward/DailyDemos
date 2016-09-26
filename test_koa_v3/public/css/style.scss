@@ -45,6 +45,17 @@ $choiceBtnFillColor: rgb(82, 225, 213);
     100% {bottom: 1%;}
 }
 
+.blur {
+    filter: url(blur.svg#blur);
+
+    -webkit-filter: blur(5px);
+       -moz-filter: blur(5px);
+        -ms-filter: blur(5px);
+            filter: blur(5px);
+
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -159,6 +170,7 @@ img {
 
     .face1 {
         color: rgba(136, 82, 127, 1);
+        text-shadow: 1px 1px 1px #000;
         background: rgba(244, 244, 244, .4);
         transform: rotateX(0deg) translateZ(27px);
     }
@@ -208,7 +220,7 @@ img {
     top: 0;
     left: 0;
 
-    .welcome {
+    .welcome,.result {
         text-align: center;
         margin: 0 auto;
         position: relative;
@@ -304,6 +316,11 @@ img {
                         text-shadow: 1px 1px 1px #030303;
                         display: inline-block;
                         vertical-align: middle;
+
+                        &:nth-child(2) {
+                            font-size: 26px;
+                            font-family: 'Boogaloo', cursive;
+                        }
                     }
                 }
 
@@ -535,6 +552,7 @@ img {
         position: absolute;
         right: 5%;
         bottom: 2%;
+        z-index: 999;
 
         span {
             font-size: 18px;
@@ -549,9 +567,17 @@ img {
             right: 25px;
             opacity: 0;
             transition: all ease-out .2s;
-
+        }
+        .right {
             &:before {
                 content: '➙';
+                font-size: 18px;
+            }
+        }
+        .down {
+            line-height: 37px;
+            &:before {
+                content: '⤣';
                 font-size: 18px;
             }
         }

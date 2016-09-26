@@ -1569,6 +1569,17 @@ a.waves-effect .waves-ripple {
     100% {bottom: 1%;}
 }
 
+.blur {
+    filter: url(blur.svg#blur);
+
+    -webkit-filter: blur(5px);
+       -moz-filter: blur(5px);
+        -ms-filter: blur(5px);
+            filter: blur(5px);
+
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -1652,7 +1663,7 @@ img {
 .author .face1, .author .face2 {width: 100%;font-size: 16px;line-height: 50px;position: absolute;height: 100%;-webkit-backface-visibility: hidden;backface-visibility: hidden;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transition: all 0.3s ease;transition: all 0.3s ease;border-radius: 2px;
 }
 
-.author .face1 {color: rgba(136, 82, 127, 1);background: rgba(244, 244, 244, .4);-webkit-transform: rotateX(0deg) translateZ(27px);transform: rotateX(0deg) translateZ(27px);
+.author .face1 {color: rgba(136, 82, 127, 1);text-shadow: 1px 1px 1px #000;background: rgba(244, 244, 244, .4);-webkit-transform: rotateX(0deg) translateZ(27px);transform: rotateX(0deg) translateZ(27px);
 }
 
 .author .face2 {color: #fff;background: rgba(26, 26, 26, .4);-webkit-transform: rotateX(90deg) translateZ(27px);transform: rotateX(90deg) translateZ(27px);
@@ -1693,10 +1704,10 @@ img {
     left: 0;
 }
 
-.container .welcome {text-align: center;margin: 0 auto;position: relative;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);
+.container .welcome, .container .result {text-align: center;margin: 0 auto;position: relative;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);
 }
 
-.container .welcome span {opacity: 0;font-family: 'Boogaloo', cursive;font-size: 100px;text-shadow: 1px 1px 2px #000;
+.container .welcome span, .container .result span {opacity: 0;font-family: 'Boogaloo', cursive;font-size: 100px;text-shadow: 1px 1px 2px #000;
 }
 
 .container .topic {color: rgba(136, 82, 127, 1);margin-top: 54px;font-size: 80px;font-family: 'Boogaloo', cursive;text-shadow: 1px 1px 1px #030303;text-align: center;
@@ -1728,7 +1739,10 @@ img {
 .container .question-wrapper .card-wrapper .card .front, .container .question-wrapper .card-wrapper .card .back {position: absolute;top: 0;left: 0;right: 0;bottom: 0;text-align: center;
 }
 
-.container .question-wrapper .card-wrapper .card .front span, .container .question-wrapper .card-wrapper .card .back span {font-size: 20px;text-shadow: 1px 1px 1px #030303;display: inline-block;vertical-align: middle;
+.container .question-wrapper .card-wrapper .card .front span, .container .question-wrapper .card-wrapper .card .back span {font-size: 20px;text-shadow: 1px 1px 1px #030303;display: inline-block;vertical-align: middle
+}
+
+.container .question-wrapper .card-wrapper .card .front span:nth-child(2), .container .question-wrapper .card-wrapper .card .back span:nth-child(2){font-size: 26px;font-family: 'Boogaloo', cursive;
 }
 
 .container .question-wrapper .card-wrapper .card .front:after, .container .question-wrapper .card-wrapper .card .back:after{content: '';height: 100%;display: inline-block;vertical-align: middle;
@@ -1838,16 +1852,24 @@ img {
 .container .question-wrapper .different-wrapper .lamp-wrapper .lamp.active{background-color: rgba(150, 237, 103, 0.9);
 }
 
-.container .submit {width: 140px;height: 40px;border-radius: 5px;cursor: pointer;text-align: center;line-height: 40px;background-color: rgba(179, 51, 101, .7);-webkit-transition: all ease-out .2s;transition: all ease-out .2s;position: absolute;right: 5%;bottom: 2%;
+.container .submit {width: 140px;height: 40px;border-radius: 5px;cursor: pointer;text-align: center;line-height: 40px;background-color: rgba(179, 51, 101, .7);-webkit-transition: all ease-out .2s;transition: all ease-out .2s;position: absolute;right: 5%;bottom: 2%;z-index: 999;
 }
 
 .container .submit span {font-size: 18px;position: relative;left: 0;-webkit-transition: left ease-out .2s;transition: left ease-out .2s;
 }
 
-.container .submit .arrow-icon {width: 18px;position: absolute;right: 25px;opacity: 0;-webkit-transition: all ease-out .2s;transition: all ease-out .2s
+.container .submit .arrow-icon {width: 18px;position: absolute;right: 25px;opacity: 0;-webkit-transition: all ease-out .2s;transition: all ease-out .2s;
 }
 
-.container .submit .arrow-icon:before{content: '➙';font-size: 18px;
+.container .submit .right {}
+
+.container .submit .right:before{content: '➙';font-size: 18px;
+}
+
+.container .submit .down {line-height: 37px
+}
+
+.container .submit .down:before{content: '⤣';font-size: 18px;
 }
 
 .container .submit.hover{background-color: rgba(136, 82, 127, .7);

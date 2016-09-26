@@ -5,7 +5,8 @@ var HW_CM = {};
 var $loader = $('.loader');
 
 selector = HW_CM.selector = '.preload';
-done = HW_CM.done = function(){$loader.remove();console.log('preloadImgs finished');};
+done = HW_CM.done = function(){$loader.remove();
+console.log('preloadImgs finished');};
 
 HW_CM.preloadImgs = function(selector, done) {
     var images = new Array();
@@ -30,16 +31,4 @@ HW_CM.preloadImgs = function(selector, done) {
         });
         images[index].src = $(item).data('source');
     });
-
-    // $('.preload').each(function() {
-    //     var $this = $(this);
-    //     var src = $this.data('source');
-    //
-    //     var img = $('<img>').attr({
-    //         src: src,
-    //         alt: ''
-    //     });
-    //
-    //     $this.append(img);
-    // });
 }

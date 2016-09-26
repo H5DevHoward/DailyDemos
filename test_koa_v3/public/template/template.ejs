@@ -1,92 +1,83 @@
 <div class="poster preload" data-bg="" data-source=<%= otherAccess.poster %>></div>
 
 <div class="container">
-    <% if (otherAccess.qIndex == 4){ %>
-        <div class="result">
-            <span><%= result %></span>
-        </div>
-
-    <% } else if (otherAccess.qIndex == 1){ %>
+    <% if (otherAccess.qIndex != 4){ %>
         <p class="topic animated bounce">Quession: <%= otherAccess.qIndex %></p>
         <div class="question-wrapper">
             <p class="title"><%= QAQ.Q %></p>
-            <div class="card-wrapper">
-                <% for(var i=0; i<QAQ.m.length; i++) {%>
-                    <div class="card" data-flag="false">
-                        <div class="front">
-                            <span><%= QAQ.m[i].title %>,&nbsp;</span><span><%= QAQ.m[i].timeout %>s</span>
+            <% if (otherAccess.qIndex == 1){ %>
+                <div class="card-wrapper">
+                    <% for(var i=0; i<QAQ.m.length; i++) {%>
+                        <div class="card" data-flag="false">
+                            <div class="front">
+                                <span><%= QAQ.m[i].title %>,&nbsp;</span><span><%= QAQ.m[i].timeout %>s</span>
+                            </div>
+                            <div class="back">
+                                <span><%= QAQ.m[i].content %></span>
+                            </div>
                         </div>
-                        <div class="back">
-                            <span><%= QAQ.m[i].content %></span>
-                        </div>
+                    <% } %>
+                </div>
+                <textarea class="yourAnswer" rows="3" cols="20"></textarea>
+
+            <% } else if (otherAccess.qIndex == 2){ %>
+                <div class="different-wrapper">
+                    <div class="overlay">
+                        <p>Are you ready ?</p>
+                        <p>click to start</p>
                     </div>
-                <% } %>
-            </div>
-            <textarea class="yourAnswer" rows="3" cols="20"></textarea>
-        </div>
-        <div class="submit">
-            <span>NEXT</span>
-            <i class="arrow-icon"></i>
-        </div>
-
-    <% } else if (otherAccess.qIndex == 2){ %>
-        <p class="topic animated bounce">QUESTION: <%= otherAccess.qIndex %></p>
-        <div class="question-wrapper">
-            <p class="title"><%= QAQ.Q %></p>
-            <div class="different-wrapper">
-                <div class="overlay">
-                    <p>Are you ready ?</p>
-                    <p>click to start</p>
-                </div>
-                <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
-                <div class="product target">
-                    <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
-                    <div class="hotspot"></div>
-                    <div class="hotspot"></div>
-                    <div class="hotspot"></div>
-                    <div class="hotspot"></div>
-                    <div class="hotspot"></div>
-                </div>
-                <div class="lamp-wrapper">
-                    <div class="lamp"></div>
-                    <div class="lamp"></div>
-                    <div class="lamp"></div>
-                    <div class="lamp"></div>
-                    <div class="lamp"></div>
-                </div>
-            </div>
-        </div>
-        <div class="submit">
-            <span>NEXT</span>
-            <i class="arrow-icon"></i>
-        </div>
-
-    <% } else if (otherAccess.qIndex == 3){ %>
-        <p class="topic animated bounce">QUESTION: <%= otherAccess.qIndex %></p>
-        <div class="question-wrapper">
-            <p class="title"><%= QAQ.Q %></p>
-            <div class="different-wrapper">
-                <div class="overlay">
-                    <p>Are you ready ?</p>
-                    <p>click to start</p>
-                </div>
-                <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
-                <div class="product target">
-                    <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
-                    <% for(var i=0; i<5; i++) {%>
+                    <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
+                    <div class="product target">
+                        <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
                         <div class="hotspot"></div>
-                    <% } %>
-                </div>
-                <div class="lamp-wrapper">
-                    <% for(var i=0; i<5; i++) {%>
+                        <div class="hotspot"></div>
+                        <div class="hotspot"></div>
+                        <div class="hotspot"></div>
+                        <div class="hotspot"></div>
+                    </div>
+                    <div class="lamp-wrapper">
                         <div class="lamp"></div>
-                    <% } %>
+                        <div class="lamp"></div>
+                        <div class="lamp"></div>
+                        <div class="lamp"></div>
+                        <div class="lamp"></div>
+                    </div>
                 </div>
-            </div>
+
+            <% } else if (otherAccess.qIndex == 3){ %>
+                <div class="different-wrapper">
+                    <div class="overlay">
+                        <p>Are you ready ?</p>
+                        <p>click to start</p>
+                    </div>
+                    <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
+                    <div class="product target">
+                        <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
+                        <% for(var i=0; i<5; i++) {%>
+                            <div class="hotspot"></div>
+                        <% } %>
+                    </div>
+                    <div class="lamp-wrapper">
+                        <% for(var i=0; i<5; i++) {%>
+                            <div class="lamp"></div>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
         </div>
+
         <div class="submit">
-            <span>NEXT</span>
-            <i class="arrow-icon"></i>
+            <% if (otherAccess.qIndex == 3){ %>
+                <span>SUBMIT</span>
+                <i class="down arrow-icon"></i>
+            <% } else { %>
+                <span>NEXT</span>
+                <i class="right arrow-icon"></i>
+            <% } %>
+        </div>
+    <% } else { %>
+        <div class="result">
+            <span><%= result %></span>
         </div>
     <% } %>
 </div>

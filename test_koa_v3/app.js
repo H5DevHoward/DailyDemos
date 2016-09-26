@@ -60,7 +60,7 @@ const otherAccess = [
     },
     {
         qIndex: 4,
-        poster: 'img/beach.jpeg'
+        poster: 'img/blur.svg'
     }
 ];
 

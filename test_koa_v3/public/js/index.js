@@ -46,6 +46,12 @@ function startAd() {
                 $item.removeClass('hover');
             }, timeout_card[cardIndex]);
         });
+
+        $('textarea.yourAnswer').keydown(function(e) {
+            if (e.keyCode == '13') {
+                $('.active.wrapper .submit').trigger('click');
+            }
+        });
     }
 
 
@@ -59,16 +65,20 @@ function startAd() {
         initAudio();
         function initAudio() {
             rightAudio = new Audio();
-            rightAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201505/5824.mp3';
+            // rightAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201505/5824.mp3';
+            rightAudio.src = '../media/right.mp3';
 
             wrongAudio = new Audio();
-            wrongAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201307/3328.mp3';
+            // wrongAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201307/3328.mp3';
+            wrongAudio.src = '../media/wrong.mp3';
 
             countDownAudio = new Audio();
-            countDownAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201509/6339.mp3';
+            // countDownAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201509/6339.mp3';
+            countDownAudio.src = '../media/countDown.mp3';
 
             victoryAudio = new Audio();
-            victoryAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201407/4667.mp3';
+            // victoryAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201407/4667.mp3';
+            victoryAudio.src = '../media/victory.mp3';
         }
 
 
@@ -141,6 +151,8 @@ function startAd() {
                         if(routIndex % 2) {
                             $('.prev').removeClass('active')
                             $('.temp').html(domWrapper).addClass('active');
+                            HW_CM.preloadImgs('.temp .preload', done);
+
 
                             TweenMax.fromTo('.prev', .7, {
                                 x: routIndex == 1 ? '0%' : '0%',
@@ -164,35 +176,72 @@ function startAd() {
                                     $('.nav-wrapper	div').eq(routIndex).addClass('active');
                                 }
                             });
-                            HW_CM.preloadImgs('.temp .preload', done);
                         }else {
                             $('.temp').removeClass('active');
                             $('.prev').html(domWrapper).addClass('active');
-
-                            TweenMax.fromTo('.prev', .7, {
-                                x: '100%',
-                                y: '0%'
-                            }, {
-                                x: '0%',
-                                y: '0%',
-                                ease: Cubic.easeInOut,
-                                delay: 0.1
-                            });
-                            TweenMax.fromTo('.temp', .7, {
-                                x: '0%',
-                                y: '0%',
-                            }, {
-                                x: '-100%',
-                                y: '0%',
-                                ease: Cubic.easeInOut,
-                                delay: 0.1,
-                                onComplete: function(){
-                                    $('.nav-wrapper	div').removeClass('active');
-                                    $('.nav-wrapper	div').eq(routIndex).addClass('active');
-                                }
-                            });
                             HW_CM.preloadImgs('.prev .preload', done);
+
+                            if(routIndex == 4) {
+                                TweenMax.to('.submit', .7, {
+                                    right: '0%',
+                                    bottom: '0%',
+                                    width: '100%',
+                                    height: '100%',
+                                    ease: Cubic.easeInOut,
+                                    delay: 0.1
+                                });
+                                TweenMax.to(['.submit span', '.submit .arrow-icon'], .7, {
+                                    autoAlpha: 0,
+                                    display: 'none',
+                                    delay: 0.1
+                                });
+
+                                $('.prev .poster').css('background-color', 'rgba(255, 255, 255, 0.5)');
+                                $('.temp .container').addClass('blur');
+
+                                TweenMax.fromTo('.prev', .7, {
+                                    x: '0%',
+                                    y: '0%',
+                                    autoAlpha: 0,
+                                    zIndex: 99
+                                }, {
+                                    autoAlpha: 1,
+                                    x: '0%',
+                                    y: '0%',
+                                    ease: Cubic.easeInOut,
+                                    delay: 0.1,
+                                    onComplete: function(){
+                                        $('.nav-wrapper	div').removeClass('active');
+                                        $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                                    }
+                                });
+                            }else {
+                                TweenMax.fromTo('.prev', .7, {
+                                    x: '100%',
+                                    y: '0%',
+                                }, {
+                                    x: '0%',
+                                    y: '0%',
+                                    ease: Cubic.easeInOut,
+                                    delay: 0.1
+                                });
+                                TweenMax.fromTo('.temp', .7, {
+                                    x: '0%',
+                                    y: '0%',
+                                }, {
+                                    x: '-100%',
+                                    y: '0%',
+                                    ease: Cubic.easeInOut,
+                                    delay: 0.1,
+                                    onComplete: function(){
+                                        $('.nav-wrapper	div').removeClass('active');
+                                        $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                                    }
+                                });
+                            }
                         }
+
+
 
                         setTimeout(function(){
                             switch(routIndex) {
@@ -205,6 +254,14 @@ function startAd() {
                                 case 3:
 
                                     break;
+                                case 4:
+                                    TweenMax.staggerFromTo('.result span' , 0.5 , {
+                                        opacity: 0,
+                                    } , {
+                                        opacity: 1,
+                                        ease: Quad.easeOut
+                                    } , 0.1);
+                                    break;
                                 default:
                                     console.log('default');
                             }
@@ -213,13 +270,12 @@ function startAd() {
 
                         var $submit = $('.active.wrapper .submit');
                         var answers = [];
-
                         $submit.on('mouseenter', function(){
                             $submit.addClass('hover');
                         }).on('mouseleave', function(){
                             $submit.removeClass('hover');
                         }).on('click', function(){
-                            // console.log(routIndex, $('textarea').val());
+                            console.log(routIndex);
                             switch(routIndex) {
                                 case 1:
                                     var q1Answer = $('textarea').val().replace(/ /g, '');
@@ -246,7 +302,8 @@ function startAd() {
                                     console.log(answers);
                                     break;
                                 case 3:
-
+                                    var q3Answer = [].slice.call($('.target.product .active')).length;
+                                    answers.push(q3Answer);
                                     break;
                                 default:
                                     console.log('default');
