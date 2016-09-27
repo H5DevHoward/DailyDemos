@@ -11,13 +11,26 @@ function startAd() {
         }
     });
 
-    TweenMax.staggerFromTo('.welcome span' , 0.5 , {
-        opacity: 0,
-    } , {
-        opacity: 1,
-        ease: Quad.easeOut,
-        delay: 0.5
-    } , 0.1);
+    var $welcome;
+    $welcome = $('.welcome').textillate({
+        loop: false,
+        initialDelay: 100,
+        in: {
+            effect: 'fadeInLeft',
+            sync: false,
+            reverse: false,
+            callback: function () {},
+        },
+        out: {
+            effect: 'fadeOutLeft',
+            sync: true,
+            reverse: false,
+            callback: function () {},
+        },
+        type: 'char',
+    });
+    $welcome.css('display', 'block');
+    $welcome.textillate('in');
 
     var routHref = [
         '/q1',
@@ -84,6 +97,15 @@ function startAd() {
 
         //register events
         $('.different-wrapper .overlay').on('click', function(){
+            TweenMax.staggerFromTo('.lamp-wrapper .lamp' , 0.5, {
+                x: '-200%',
+            } , {
+                x: '0%',
+                ease: Quad.easeOut,
+                delay: 0.3
+            } , 0.05);
+
+
             countDown20 = setTimeout(function(){
                 countDownAudio.play();
             }, totleTime-20000);
@@ -255,12 +277,34 @@ function startAd() {
 
                                     break;
                                 case 4:
-                                    TweenMax.staggerFromTo('.result span' , 0.5 , {
-                                        opacity: 0,
-                                    } , {
-                                        opacity: 1,
-                                        ease: Quad.easeOut
-                                    } , 0.1);
+                                    var $resultTitle, $result;
+                                    $resultTitle = $('.result .title').textillate({
+                            			loop: false,
+                            			initialDelay: 0,
+                            			in: {
+                                			effect: 'fadeInLeft',
+                                			sync: false,
+                                			reverse: false,
+                                            shuffle: true,
+                                			callback: function () {},
+                                		},
+                                		type: 'char'
+                                	});
+                                    $result = $('.result .option').textillate({
+                            			loop: false,
+                            			initialDelay: 0,
+                            			in: {
+                                			effect: 'fadeInLeft',
+                                			sync: false,
+                                			reverse: false,
+                                            shuffle: true,
+                                			callback: function () {},
+                                		},
+                                		type: 'char'
+                                	});
+                                    $('.result').css('display', 'block');
+                                    $resultTitle.textillate('in');
+                                    $result.textillate('in');
                                     break;
                                 default:
                                     console.log('default');
@@ -302,8 +346,8 @@ function startAd() {
                                     console.log(answers);
                                     break;
                                 case 3:
-                                    var q3Answer = [].slice.call($('.target.product .active')).length;
-                                    answers.push(q3Answer);
+                                    // var q3Answer = [].slice.call($('.target.product .active')).length;
+                                    answers.push(0);
                                     break;
                                 default:
                                     console.log('default');

@@ -33,6 +33,10 @@ gulp.task('css', function () {
         .pipe(reload({stream: true}));
 });
 
+gulp.task('template', function () {
+    return gulp.src('./public/template/*.ejs')
+        .pipe(reload({stream: true}));
+});
 gulp.task('ejs', function () {
     return gulp.src('./views/*.ejs')
         .pipe(reload({stream: true}));
@@ -54,6 +58,7 @@ gulp.task('watch', function() {
         proxy: 'localhost:3123'
     });
     gulp.watch('views/*.ejs', ['ejs']);
+    gulp.watch('public/template/*.ejs', ['template']);
     gulp.watch('public/css/*.scss', ['css']);
     gulp.watch('public/js/*.js', ['js']);
     gulp.watch('public/img/*', ['img']).on('change', reload);
