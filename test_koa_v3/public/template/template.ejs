@@ -66,15 +66,21 @@
             <% } %>
         </div>
 
-        <div class="submit animated fadeInUp">
-            <% if (otherAccess.qIndex == 3){ %>
+        <% if (otherAccess.qIndex == 3){ %> 
+            <div class="submit animated fadeInUp">
                 <span>SUBMIT</span>
                 <i class="down arrow-icon"></i>
-            <% } else { %>
+            </div>
+            <div class="resultOverlay"></div>
+
+        <% } else { %>
+            <div class="submit animated fadeInUp">
                 <span>NEXT</span>
                 <i class="right arrow-icon"></i>
-            <% } %>
-        </div>
+            </div>
+        <% } %>
+
+
     <% } else { %>
         <div class="result">
             <p class="title">SCORE:</P>

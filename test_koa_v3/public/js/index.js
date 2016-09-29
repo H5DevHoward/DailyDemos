@@ -1,5 +1,41 @@
 function startAd() {
-    console.log('=== startAd ===');
+    var week = '今天星期:' + '日一二三四五六'.charAt(new Date().getDay());
+    console.log(week);
+
+    var HW_CM = {};
+
+    selector = HW_CM.selector = '.preload';
+    done = HW_CM.done = function(){
+        console.log('preloadImgs finished');
+    };
+
+    HW_CM.preloadImgs = function(selector, done) {
+        var images = new Array();
+        var imgLen, currentIndex = 0;
+        imgLen = $(selector).length;
+        $(selector).each(function(index, item) {
+            images[index] = new Image();
+            images[index].addEventListener('load', function() {
+                if(typeof($(item).attr('data-bg')) != 'undefined') {
+                    $(item).css({
+                        'background-image': 'url('+images[index].src+')',
+                        'background-position': 'center',
+                        'background-repeat': 'no-repeat',
+                        'background-size': 'cover'
+                    });
+                }else {
+                    $(item).append('<img src="'+images[index].src+'">');
+                }
+                if (++currentIndex == imgLen) {
+                    done();
+                }
+            });
+            images[index].src = $(item).data('source');
+        });
+    }
+
+
+
     HW_CM.preloadImgs(selector, done);
 
     $.fn.extend({
@@ -11,19 +47,12 @@ function startAd() {
         }
     });
 
-    var $welcome;
-    $welcome = $('.welcome').textillate({
+    var $welcome = $('.welcome').textillate({
         loop: false,
         initialDelay: 100,
         in: {
             effect: 'fadeInLeft',
             sync: false,
-            reverse: false,
-            callback: function () {},
-        },
-        out: {
-            effect: 'fadeOutLeft',
-            sync: true,
             reverse: false,
             callback: function () {},
         },
@@ -38,19 +67,15 @@ function startAd() {
         '/q3',
         '/result'
     ];
-
     var routIndex = 0;
-    var $cta = $('.cta');
+
 
     function question1(timeout) {
         var timeout_card = [timeout[0].timeout*1000, timeout[1].timeout*1000, timeout[2].timeout*1000];
 
         $('.card-wrapper').on('mouseenter', '.card', function(){
-            // console.log($(this).index(), $(this).attr('data-flag'));
-
             var $item = $(this);
             var cardIndex = $item.index();
-
 
             if($(this).attr('data-flag') == 'true') return;
             $(this).addClass('hover');
@@ -62,7 +87,7 @@ function startAd() {
 
         $('textarea.yourAnswer').keydown(function(e) {
             if (e.keyCode == '13') {
-                $('.active.wrapper .submit').trigger('click');
+                $('.wrapper.active .submit').trigger('click');
             }
         });
     }
@@ -170,27 +195,36 @@ function startAd() {
                     }).then(function(body) {
                         var domWrapper = ejs.render(body, data);
 
-                        if(routIndex % 2) {
-                            $('.prev').removeClass('active')
-                            $('.temp').html(domWrapper).addClass('active');
-                            HW_CM.preloadImgs('.temp .preload', done);
+                        $('.prev,.temp').toggleClass('active').toggleClass('inactive');
 
+                        $('.wrapper.active').html(domWrapper);
+                        HW_CM.preloadImgs('.wrapper.active .preload', done);
 
-                            TweenMax.fromTo('.prev', .7, {
-                                x: routIndex == 1 ? '0%' : '0%',
-                                y: routIndex == 1 ? '0%' : '0%',
-                            }, {
-                                x: routIndex == 1 ? '0%' : '-100%',
-                                y: routIndex == 1 ? '-100%' : '0%',
-                                ease: Cubic.easeInOut,
+                        console.log(routIndex);
+
+                        if(routIndex == 4) {
+                            TweenMax.to('.submit', .1, {
+                                autoAlpha: 0
+                            });
+                            TweenMax.to('.resultOverlay', .5, {
+                                autoAlpha: 1,
+                                scaleX: 20,
+                                scaleY: 40,
                                 delay: 0.1
                             });
-                            TweenMax.fromTo('.temp', .7, {
-                                x: routIndex == 1 ? '0%' : '100%',
-                                y: routIndex == 1 ? '100%' : '0%',
+
+                            $('.prev .poster').css('background-color', 'rgba(255, 255, 255, 0.5)');
+                            $('.temp .container').addClass('blur');
+
+                            TweenMax.fromTo('.prev', .7, {
+                                x: '0%',
+                                y: '0%',
+                                autoAlpha: 0,
+                                zIndex: 2
                             }, {
-                                x: routIndex == 1 ? '0%' : '0%',
-                                y: routIndex == 1 ? '0%' : '0%',
+                                autoAlpha: 1,
+                                x: '0%',
+                                y: '0%',
                                 ease: Cubic.easeInOut,
                                 delay: 0.1,
                                 onComplete: function(){
@@ -199,69 +233,135 @@ function startAd() {
                                 }
                             });
                         }else {
-                            $('.temp').removeClass('active');
-                            $('.prev').html(domWrapper).addClass('active');
-                            HW_CM.preloadImgs('.prev .preload', done);
-
-                            if(routIndex == 4) {
-                                TweenMax.to('.submit', .7, {
-                                    right: '0%',
-                                    bottom: '0%',
-                                    width: '100%',
-                                    height: '100%',
-                                    ease: Cubic.easeInOut,
-                                    delay: 0.1
-                                });
-                                TweenMax.to(['.submit span', '.submit .arrow-icon'], .7, {
-                                    autoAlpha: 0,
-                                    display: 'none',
-                                    delay: 0.1
-                                });
-
-                                $('.prev .poster').css('background-color', 'rgba(255, 255, 255, 0.5)');
-                                $('.temp .container').addClass('blur');
-
-                                TweenMax.fromTo('.prev', .7, {
-                                    x: '0%',
-                                    y: '0%',
-                                    autoAlpha: 0,
-                                    zIndex: 99
-                                }, {
-                                    autoAlpha: 1,
-                                    x: '0%',
-                                    y: '0%',
-                                    ease: Cubic.easeInOut,
-                                    delay: 0.1,
-                                    onComplete: function(){
-                                        $('.nav-wrapper	div').removeClass('active');
-                                        $('.nav-wrapper	div').eq(routIndex).addClass('active');
-                                    }
-                                });
-                            }else {
-                                TweenMax.fromTo('.prev', .7, {
-                                    x: '100%',
-                                    y: '0%',
-                                }, {
-                                    x: '0%',
-                                    y: '0%',
-                                    ease: Cubic.easeInOut,
-                                    delay: 0.1
-                                });
-                                TweenMax.fromTo('.temp', .7, {
-                                    x: '0%',
-                                    y: '0%',
-                                }, {
-                                    x: '-100%',
-                                    y: '0%',
-                                    ease: Cubic.easeInOut,
-                                    delay: 0.1,
-                                    onComplete: function(){
-                                        $('.nav-wrapper	div').removeClass('active');
-                                        $('.nav-wrapper	div').eq(routIndex).addClass('active');
-                                    }
-                                });
-                            }
+                            TweenMax.fromTo('.wrapper.inactive', .7, {
+                                x: routIndex == 1 ? '0%' : ('0%'),
+                                y: routIndex == 1 ? '0%' : ('0%'),
+                                autoAlpha: routIndex == 4 ? 0 : 1,
+                                zIndex: 2
+                            }, {
+                                x: routIndex == 1 ? '0%' : ('-100%'),
+                                y: routIndex == 1 ? '-100%' : ('0%'),
+                                autoAlpha: 1,
+                                ease: Cubic.easeInOut,
+                                delay: 0.1
+                            });
+                            TweenMax.fromTo('.wrapper.active', .7, {
+                                x: routIndex == 1 ? '0%' : ('100%'),
+                                y: routIndex == 1 ? '100%' : ('0%')
+                            }, {
+                                x: routIndex == 1 ? '0%' : ('0%'),
+                                y: routIndex == 1 ? '0%' : ('0%'),
+                                ease: Cubic.easeInOut,
+                                zIndex: 1,
+                                delay: 0.1,
+                                onComplete: function(){
+                                    $('.nav-wrapper	div').removeClass('active');
+                                    $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                                }
+                            });
                         }
+
+                        // if(routIndex % 2) {
+                        //     $('.prev').removeClass('active')
+                        //     $('.temp').html(domWrapper).addClass('active');
+                        //     HW_CM.preloadImgs('.temp .preload', done);
+                        //
+                        //
+                        //     TweenMax.fromTo('.prev', .7, {
+                        //         x: routIndex == 1 ? '0%' : '0%',
+                        //         y: routIndex == 1 ? '0%' : '0%',
+                        //     }, {
+                        //         x: routIndex == 1 ? '0%' : '-100%',
+                        //         y: routIndex == 1 ? '-100%' : '0%',
+                        //         ease: Cubic.easeInOut,
+                        //         delay: 0.1
+                        //     });
+                        //     TweenMax.fromTo('.temp', .7, {
+                        //         x: routIndex == 1 ? '0%' : '100%',
+                        //         y: routIndex == 1 ? '100%' : '0%',
+                        //     }, {
+                        //         x: routIndex == 1 ? '0%' : '0%',
+                        //         y: routIndex == 1 ? '0%' : '0%',
+                        //         ease: Cubic.easeInOut,
+                        //         delay: 0.1,
+                        //         onComplete: function(){
+                        //             $('.nav-wrapper	div').removeClass('active');
+                        //             $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                        //         }
+                        //     });
+                        // }else {
+                        //     $('.temp').removeClass('active');
+                        //     $('.prev').html(domWrapper).addClass('active');
+                        //     HW_CM.preloadImgs('.prev .preload', done);
+                        //
+                        //     if(routIndex == 4) {
+                        //         // TweenMax.to('.submit', .7, {
+                        //         //     right: '0%',
+                        //         //     bottom: '0%',
+                        //         //     width: '100%',
+                        //         //     height: '100%',
+                        //         //     ease: Cubic.easeInOut,
+                        //         //     delay: 0.1
+                        //         // });
+                        //         // TweenMax.to(['.submit span', '.submit .arrow-icon'], .7, {
+                        //         //     autoAlpha: 0,
+                        //         //     display: 'none',
+                        //         //     delay: 0.1
+                        //         // });
+                        //         TweenMax.to('.submit', .1, {
+                        //             autoAlpha: 0
+                        //         });
+                        //         TweenMax.to('.resultOverlay', .5, {
+                        //             autoAlpha: 1,
+                        //             scaleX: 20,
+                        //             scaleY: 40,
+                        //             delay: 0.1
+                        //         });
+                        //
+                        //         $('.prev .poster').css('background-color', 'rgba(255, 255, 255, 0.5)');
+                        //         $('.temp .container').addClass('blur');
+                        //
+                        //         TweenMax.fromTo('.prev', .7, {
+                        //             x: '0%',
+                        //             y: '0%',
+                        //             autoAlpha: 0,
+                        //             zIndex: 2
+                        //         }, {
+                        //             autoAlpha: 1,
+                        //             x: '0%',
+                        //             y: '0%',
+                        //             ease: Cubic.easeInOut,
+                        //             delay: 0.1,
+                        //             onComplete: function(){
+                        //                 $('.nav-wrapper	div').removeClass('active');
+                        //                 $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                        //             }
+                        //         });
+                        //     }else {
+                        //         TweenMax.fromTo('.prev', .7, {
+                        //             x: '100%',
+                        //             y: '0%',
+                        //         }, {
+                        //             x: '0%',
+                        //             y: '0%',
+                        //             ease: Cubic.easeInOut,
+                        //             delay: 0.1
+                        //         });
+                        //         TweenMax.fromTo('.temp', .7, {
+                        //             x: '0%',
+                        //             y: '0%',
+                        //         }, {
+                        //             x: '-100%',
+                        //             y: '0%',
+                        //             ease: Cubic.easeInOut,
+                        //             delay: 0.1,
+                        //             onComplete: function(){
+                        //                 $('.nav-wrapper	div').removeClass('active');
+                        //                 $('.nav-wrapper	div').eq(routIndex).addClass('active');
+                        //             }
+                        //         });
+                        //     }
+                        // }
 
 
 
@@ -319,13 +419,13 @@ function startAd() {
                         }).on('mouseleave', function(){
                             $submit.removeClass('hover');
                         }).on('click', function(){
-                            console.log(routIndex);
+                            // console.log(routIndex);
                             switch(routIndex) {
                                 case 1:
                                     var q1Answer = $('textarea').val().replace(/ /g, '');
                                     if(q1Answer.length < 1) return;
                                     answers.push(q1Answer);
-                                    console.log(answers);
+                                    // console.log(answers);
                                     break;
                                 case 2:
                                     flag_q2_end = true;
@@ -361,7 +461,7 @@ function startAd() {
                                 }
                             )
                             .done(function(data) {
-                                console.log('successed', data);
+                                console.log('successed');
                                 loadNextPage();
                             })
                             .fail(function() {
@@ -373,6 +473,7 @@ function startAd() {
         });
     }
 
+    var $cta = $('.cta');
     $cta.on('click', function(){
         loadNextPage();
     });

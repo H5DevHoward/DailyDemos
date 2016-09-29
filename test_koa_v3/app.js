@@ -135,7 +135,7 @@ router
             default:
                 console.log('default');
         }
-        console.log(scores);
+        // console.log(scores);
 
         yield this.render('/q', {
             answer: scores,
@@ -145,7 +145,6 @@ router
     .post('/result', koaBody, function*(next) {
         // console.log(qAnswer);
         this.body = {
-            result: 'DONE!',
             scrore: scores,
             otherAccess: otherAccess[4]
         };

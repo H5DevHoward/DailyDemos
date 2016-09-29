@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>FPG HOWARD</title>
 	<style>
-		@import 'https://fonts.googleapis.com/css?family=Boogaloo';
+		/*@import 'https://fonts.googleapis.com/css?family=Boogaloo';
 		@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro';
-		@import 'https://fonts.googleapis.com/css?family=Catamaran';
+		@import 'https://fonts.googleapis.com/css?family=Catamaran';*/
 	</style>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -28,8 +28,6 @@
 			local: 'js/ejs.min.js'
 		}, {
 			local: 'js/plugins.js'
-		}, {
-			local: 'js/common.js'
 		}, {
 			local: 'js/index.js'
 		}];
@@ -93,11 +91,11 @@
 	</div>
 
 
-	<div class="wrapper prev">
+	<div class="wrapper prev active">
 		<% include home.ejs %>
 	</div>
 
-	<div class="wrapper temp"></div>
+	<div class="wrapper temp inactive"></div>
 </body>
 
 </html>
