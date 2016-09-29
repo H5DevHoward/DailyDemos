@@ -29,18 +29,21 @@
                     <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
                     <div class="product target">
                         <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
-                        <div class="hotspot"></div>
-                        <div class="hotspot"></div>
-                        <div class="hotspot"></div>
-                        <div class="hotspot"></div>
-                        <div class="hotspot"></div>
+                        <% for(var i=0; i<5; i++) {%>
+                            <div class="hotspot"></div>
+                        <% } %>
+
+                        <div class="defeat-wrapper">
+                            <% for(var i=0; i<5; i++) {%>
+                                <div class="defeatCircle"></div>
+                            <% } %>
+                            <span class="defeatCopy">DEFEAT!</span>
+                        </div>
                     </div>
                     <div class="lamp-wrapper">
-                        <div class="lamp"></div>
-                        <div class="lamp"></div>
-                        <div class="lamp"></div>
-                        <div class="lamp"></div>
-                        <div class="lamp"></div>
+                        <% for(var i=0; i<5; i++) {%>
+                            <div class="lamp"></div>
+                        <% } %>
                     </div>
                 </div>
 
@@ -66,7 +69,7 @@
             <% } %>
         </div>
 
-        <% if (otherAccess.qIndex == 3){ %> 
+        <% if (otherAccess.qIndex == 3){ %>
             <div class="submit animated fadeInUp">
                 <span>SUBMIT</span>
                 <i class="down arrow-icon"></i>

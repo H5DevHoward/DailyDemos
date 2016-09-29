@@ -2393,31 +2393,50 @@ img {
 .container .question-wrapper .yourAnswer {font-size: 20px;color: #f0ba83;text-align: left;width: 400px;height: 100px;border: 5px solid rgba(179, 51, 101, 1);-webkit-animation-delay: 1.4s;animation-delay: 1.4s;
 }
 
-.container .question-wrapper .different-wrapper {position: relative;width: 100%;-webkit-animation-duration: 1.5s;animation-duration: 1.5s;-webkit-animation-delay: 1s;animation-delay: 1s;
+.container .question-wrapper .different-wrapper {position: relative;width: 100%;overflow: hidden;-webkit-animation-duration: 1.5s;animation-duration: 1.5s;-webkit-animation-delay: 1s;animation-delay: 1s;
 }
 
-.container .question-wrapper .different-wrapper .product {width: 40%;display: inline-block;margin: 0 10px;position: relative;
+.container .question-wrapper .different-wrapper .product {width: 40%;display: inline-block;margin: 0 10px;position: relative;font-size: 0;z-index: 2;
 }
 
-.container .question-wrapper .different-wrapper .targetItem {cursor: pointer;
+.container .question-wrapper .different-wrapper .target {position: absolute;top: 0;bottom: 0;overflow: hidden;/*canvas {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }*/
 }
 
-.container .question-wrapper .different-wrapper .hotspot {width: 50px;height: 50px;// border-radius: 50%;-webkit-transition: border ease-out .2s;transition: border ease-out .2s;-webkit-transform-origin: center;transform-origin: center;box-sizing: border-box;position: absolute;cursor: pointer
+.container .question-wrapper .different-wrapper .defeat-wrapper {width: 100%;height: 100%;position: absolute;top: 0;left: 0;overflow: hidden;display: none;text-align: center;
+}
+
+.container .question-wrapper .different-wrapper .defeat-wrapper .defeatCircle {width: 16%;height: 11%;border: 0.1px solid #000;border-radius: 50%;background-color: rgba(0, 0, 0, .5);position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;opacity: 0;visibility: hidden;
+}
+
+.container .question-wrapper .different-wrapper .defeat-wrapper .defeatCopy {display: inline-block;font-size: 0.4vw;text-shadow: 0.5px 0.5px 0.5px #000;position: relative;top: 49%;z-index: 99;
+}
+
+.container .question-wrapper .different-wrapper .targetItem {position: relative;cursor: pointer;// display: none;
+}
+
+.container .question-wrapper .different-wrapper .hotspot {width: 12%;height: 8%;// border-radius: 50%;-webkit-transition: border ease-out .2s;transition: border ease-out .2s;-webkit-transform-origin: center;transform-origin: center;box-sizing: border-box;position: absolute;cursor: pointer
 }
 
 .container .question-wrapper .different-wrapper .hotspot:nth-child(2) {top: 4%;left: 72%;
 }
 
-.container .question-wrapper .different-wrapper .hotspot:nth-child(3) {top: 25%;left: 0;
+.container .question-wrapper .different-wrapper .hotspot:nth-child(3) {top: 26%;left: 0;
 }
 
 .container .question-wrapper .different-wrapper .hotspot:nth-child(4) {top: 32%;right: 0;
 }
 
-.container .question-wrapper .different-wrapper .hotspot:nth-child(5) {top: 53%;left: 0;
+.container .question-wrapper .different-wrapper .hotspot:nth-child(5) {top: 52%;left: 0;
 }
 
-.container .question-wrapper .different-wrapper .hotspot:nth-child(6) {top: 41%;left: 72%;
+.container .question-wrapper .different-wrapper .hotspot:nth-child(6) {top: 41%;left: 73%;
 }
 
 .container .question-wrapper .different-wrapper .hotspot.active {border: 4px solid rgb(242, 207, 130);
@@ -2426,7 +2445,7 @@ img {
 .container .question-wrapper .different-wrapper .overlay {position: absolute;top: 0;right: 0%;z-index: 999;width: 59%;height: 100%;text-align: center;background-color: rgb(201, 170, 171);cursor: pointer;
 }
 
-.container .question-wrapper .different-wrapper .overlay p {font-size: 40px;position: relative;-webkit-transition: all ease-out .2s;transition: all ease-out .2s;cursor: pointer
+.container .question-wrapper .different-wrapper .overlay p {font-size: 3vw;position: relative;-webkit-transition: all ease-out .2s;transition: all ease-out .2s;cursor: pointer
 }
 
 .container .question-wrapper .different-wrapper .overlay p:nth-child(1) {top: 40%;
@@ -2455,7 +2474,7 @@ img {
 .container .question-wrapper .different-wrapper .overlay:hover:before, .container .question-wrapper .different-wrapper .overlay:hover:after {opacity: 1;-webkit-transform: scale(1);transform: scale(1);
 }
 
-.container .question-wrapper .different-wrapper .lamp-wrapper {width: 20%;height: 100%;position: absolute;top: 0;right: -5%;opacity: 0;visibility: hidden;overflow: hidden;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between;-webkit-box-align: center;-ms-flex-align: center;align-items: center;
+.container .question-wrapper .different-wrapper .lamp-wrapper {width: 25%;height: 100%;position: absolute;top: 0;right: -8%;opacity: 0;visibility: hidden;overflow: hidden;z-index: 1;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between;-webkit-box-align: center;-ms-flex-align: center;align-items: center;
 }
 
 .container .question-wrapper .different-wrapper .lamp-wrapper .lamp {width: 4vw;height: 4vw;border-radius: 50%;background-color: rgba(242, 89, 84, 0.9);-webkit-transition: background-color ease-out .2s;transition: background-color ease-out .2s

@@ -143,7 +143,7 @@ router
         });
     })
     .post('/result', koaBody, function*(next) {
-        // console.log(qAnswer);
+        console.log(qAnswer);
         this.body = {
             scrore: scores,
             otherAccess: otherAccess[4]
