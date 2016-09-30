@@ -15,17 +15,17 @@ const QAQ = [
         m: [
             {
                 title: 'Only one chance',
-                content: '3.14159 26535 89793 23846 26433 83279 50288',
+                content: '3.14159 26535 89793 23846',
                 timeout: 5
             },
             {
                 title: 'Only one chance',
-                content: '3.14159 26535 89793 23846 26433 83279 50288 41971 69399 37510 58209',
+                content: '3.14159 26535 89793 23846 26433 83279',
                 timeout: 4
             },
             {
                 title: 'Only one chance',
-                content: '3.14159 26535 89793 23846 26433 83279 50288 41971 69399 37510 58209 74944 59230 78164',
+                content: '3.14159 26535 89793 23846 26433 83279 50288',
                 timeout: 3
             }
         ],
@@ -69,7 +69,6 @@ const otherAccess = [
 ];
 
 const qAnswer = new Map();
-// const scores = [];
 const scores = new Map();
 
 

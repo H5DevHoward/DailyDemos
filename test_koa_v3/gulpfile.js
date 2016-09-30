@@ -6,6 +6,7 @@ const cssnano = require('cssnano');
 const cssnext = require('cssnext');
 const precss = require('precss');
 const rename = require('gulp-rename');
+const sequence = require('gulp-sequence');
 
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
@@ -55,4 +56,8 @@ gulp.task('watch', function() {
     gulp.watch('public/css/*.scss', ['css']);
     gulp.watch('public/js/*.js', ['js']);
     gulp.watch('public/img/*', ['img']).on('change', reload);
+});
+
+gulp.task('default', function(cb) {
+    sequence('watch', cb);
 });
