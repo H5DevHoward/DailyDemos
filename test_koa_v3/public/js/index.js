@@ -33,10 +33,10 @@ function startAd() {
             images[index].src = $(item).data('source');
         });
     }
-
-
-
     HW_CM.preloadImgs(selector, done);
+
+
+
 
     $.fn.extend({
         animateCss: function(animationName) {
@@ -172,7 +172,6 @@ function startAd() {
         });
     }
 
-
     var countDownAudio,rightAudio,wrongAudio,victoryAudio;
     var countDown20,countDownEnd;
     var flag_q2_end = false;
@@ -185,24 +184,57 @@ function startAd() {
         initAudio();
         function initAudio() {
             rightAudio = new Audio();
-            // rightAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201505/5824.mp3';
             rightAudio.src = '../media/right.mp3';
 
             wrongAudio = new Audio();
-            // wrongAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201307/3328.mp3';
             wrongAudio.src = '../media/wrong.mp3';
 
             countDownAudio = new Audio();
-            // countDownAudio.src = 'http://wt.sc.chinaz.com/Files/DownLoad/sound1/201509/6339.mp3';
             countDownAudio.src = '../media/countDown.mp3';
 
             victoryAudio = new Audio();
-            // victoryAudio.src = 'http://wt.sc.chinaz.com/files/download/sound1/201407/4667.mp3';
             victoryAudio.src = '../media/victory.mp3';
         }
 
         var lampIndex = 0;
         var lampArray = $.makeArray($('.lamp'));
+        var tweenItemLen = lampArray.length;
+        function findEndAnimation(copy) {
+            $('.defeat-wrapper').css('display', 'block');
+            TweenMax.staggerFromTo('.lamp-wrapper .lamp' , 0.5, {
+                x: '0%',
+            } , {
+                x: '-230%',
+                ease: Quad.easeOut,
+                delay: 0.3,
+                onComplete: function(tween){
+                    var tweenItemIndex = $(tween.target).index();
+                    if(tweenItemIndex) {
+                        TweenMax.fromTo('.defeatCircle:nth-child('+(tweenItemIndex+1)+')', .2, {
+                            zIndex: tweenItemLen-tweenItemIndex
+                        }, {
+                            autoAlpha: 1,
+                            scale: 3*tweenItemIndex,
+                            backgroundColor: $(tween.target).css('background-color'),
+                            ease: Bounce.easeInOut
+                        });
+                    }else {
+                        TweenMax.to('.defeatCircle:nth-child(1)', .2, {
+                            autoAlpha: 1,
+                            backgroundColor: $(tween.target).css('background-color'),
+                            zIndex: tweenItemLen-tweenItemIndex
+                        });
+                    }
+                },
+                onCompleteParams:["{self}"]
+            } , 0.05, function(){
+                TweenMax.to(copy, .2, {
+                    autoAlpha: 1,
+                    scale: 12,
+                    ease: Bounce.easeInOut
+                });
+            });
+        }
         //register events
         $('.different-wrapper .overlay').on('click', function(){
             TweenMax.staggerFromTo('.lamp-wrapper .lamp' , 0.5, {
@@ -221,44 +253,40 @@ function startAd() {
             countDownEnd = setTimeout(function(){
                 // alert('BOOM!');
                 // anim();
-                var tweenItemLen = lampArray.length;
-                $('.defeat-wrapper').css('display', 'block');
-                TweenMax.staggerFromTo('.lamp-wrapper .lamp' , 0.5, {
-                    x: '0%',
-                } , {
-                    x: '-230%',
-                    ease: Quad.easeOut,
-                    delay: 0.3,
-                    onComplete: function(tween){
-                        var tweenItemIndex = $(tween.target).index();
-                        console.log(tweenItemIndex);
-                        if(tweenItemIndex) {
-                            // TweenMax.to('.defeatCopy', .2, {
-                            //     scale: 3*tweenItemIndex
-                            // });
-                            TweenMax.fromTo('.defeatCircle:nth-child('+(tweenItemIndex+1)+')', .2, {
-                                zIndex: tweenItemLen-tweenItemIndex
-                            }, {
-                                autoAlpha: 1,
-                                scale: 3*tweenItemIndex,
-                                backgroundColor: $(tween.target).css('background-color'),
-                                ease: Bounce.easeInOut
-                            });
-                        }else {
-                            TweenMax.to('.defeatCircle:nth-child(1)', .2, {
-                                autoAlpha: 1,
-                                backgroundColor: $(tween.target).css('background-color'),
-                                zIndex: tweenItemLen-tweenItemIndex
-                            });
-                        }
-                    },
-                    onCompleteParams:["{self}"]
-                } , 0.05, function(){
-                    TweenMax.to('.defeatCopy', .2, {
-                        scale: 12,
-                        ease: Bounce.easeInOut
-                    });
-                });
+                findEndAnimation('.defeatCopy');
+                // $('.defeat-wrapper').css('display', 'block');
+                // TweenMax.staggerFromTo('.lamp-wrapper .lamp' , 0.5, {
+                //     x: '0%',
+                // } , {
+                //     x: '-230%',
+                //     ease: Quad.easeOut,
+                //     delay: 0.3,
+                //     onComplete: function(tween){
+                //         var tweenItemIndex = $(tween.target).index();
+                //         if(tweenItemIndex) {
+                //             TweenMax.fromTo('.defeatCircle:nth-child('+(tweenItemIndex+1)+')', .2, {
+                //                 zIndex: tweenItemLen-tweenItemIndex
+                //             }, {
+                //                 autoAlpha: 1,
+                //                 scale: 3*tweenItemIndex,
+                //                 backgroundColor: $(tween.target).css('background-color'),
+                //                 ease: Bounce.easeInOut
+                //             });
+                //         }else {
+                //             TweenMax.to('.defeatCircle:nth-child(1)', .2, {
+                //                 autoAlpha: 1,
+                //                 backgroundColor: $(tween.target).css('background-color'),
+                //                 zIndex: tweenItemLen-tweenItemIndex
+                //             });
+                //         }
+                //     },
+                //     onCompleteParams:["{self}"]
+                // } , 0.05, function(){
+                //     TweenMax.to('.defeatCopy', .2, {
+                //         scale: 12,
+                //         ease: Bounce.easeInOut
+                //     });
+                // });
 
                 flag_q2_end = true;
             }, totleTime);
@@ -271,7 +299,6 @@ function startAd() {
                 autoAlpha: 1
             });
         });
-
 
         $('.target.product').on('click', '.targetItem', function(){
             if(flag_q2_end) return;
@@ -292,6 +319,7 @@ function startAd() {
             if(lampIndex == lampArray.length-1) {
                 flag_q2_end = true;
                 console.log('victory');
+                findEndAnimation('.victoryCopy');
 
                 victoryAudio.play();
 
@@ -357,8 +385,8 @@ function startAd() {
                             });
                         }else {
                             TweenMax.fromTo('.wrapper.inactive', .7, {
-                                x: routIndex == 1 ? '0%' : ('0%'),
-                                y: routIndex == 1 ? '0%' : ('0%'),
+                                x: '0%',
+                                y: '0%',
                                 autoAlpha: routIndex == 4 ? 0 : 1,
                                 zIndex: 2
                             }, {
@@ -372,8 +400,8 @@ function startAd() {
                                 x: routIndex == 1 ? '0%' : ('100%'),
                                 y: routIndex == 1 ? '100%' : ('0%')
                             }, {
-                                x: routIndex == 1 ? '0%' : ('0%'),
-                                y: routIndex == 1 ? '0%' : ('0%'),
+                                x: '0%',
+                                y: '0%',
                                 ease: Cubic.easeInOut,
                                 zIndex: 1,
                                 delay: 0.1,
@@ -396,8 +424,7 @@ function startAd() {
 
                                     break;
                                 case 4:
-                                    var $resultTitle, $result;
-                                    $resultTitle = $('.result .title').textillate({
+                                    var $resultTitle = $('.result .title').textillate({
                             			loop: false,
                             			initialDelay: 0,
                             			in: {
@@ -409,7 +436,7 @@ function startAd() {
                                 		},
                                 		type: 'char'
                                 	});
-                                    $result = $('.result .option').textillate({
+                                    var $result = $('.result .option').textillate({
                             			loop: false,
                             			initialDelay: 0,
                             			in: {
@@ -438,13 +465,12 @@ function startAd() {
                         }).on('mouseleave', function(){
                             $submit.removeClass('hover');
                         }).on('click', function(){
-                            // console.log(routIndex);
                             switch(routIndex) {
                                 case 1:
                                     var q1Answer = $('textarea').val().replace(/ /g, '');
-                                    if(q1Answer.length < 1) return;
+                                    // if(q1Answer.length < 1) return;
                                     answers.push(q1Answer);
-                                    // console.log(answers);
+                                    console.log(q1Answer);
                                     break;
                                 case 2:
                                     flag_q2_end = true;
@@ -460,9 +486,9 @@ function startAd() {
                                     victoryAudio.pause();
                                     victoryAudio.currentTime = 0;
 
-                                    var q2Answer = [].slice.call($('.target.product .active')).length;
+                                    var q2Answer = $.makeArray($('.lamp.active')).length;
                                     answers.push(q2Answer);
-                                    console.log(answers);
+                                    console.log(q2Answer);
                                     break;
                                 case 3:
                                     // var q3Answer = [].slice.call($('.target.product .active')).length;

@@ -38,6 +38,7 @@
                                 <div class="defeatCircle"></div>
                             <% } %>
                             <span class="defeatCopy">DEFEAT!</span>
+                            <span class="victoryCopy">VICTORY!</span>
                         </div>
                     </div>
                     <div class="lamp-wrapper">
@@ -86,7 +87,7 @@
 
     <% } else { %>
         <div class="result">
-            <p class="title">SCORE:</P>
+            <p class="title">SCORE: <%= scrore[3] %></P>
             <p class="option">question1:&nbsp;<span><%= scrore[0] %></span></P>
             <p class="option">question2:&nbsp;<span><%= scrore[1] %></span></P>
             <p class="option">question3:&nbsp;<span><%= scrore[2] %></span></P>

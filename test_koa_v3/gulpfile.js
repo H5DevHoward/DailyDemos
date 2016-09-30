@@ -1,8 +1,6 @@
 const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
-// const sass = require('gulp-sass');
-// const compass = require( 'gulp-for-compass' );
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const cssnext = require('cssnext');
@@ -20,11 +18,6 @@ gulp.task('css', function () {
         // cssnano
     ];
     return gulp.src('./public/css/*.scss')
-        // .pipe(sass().on('error', sass.logError))
-        // .pipe(compass({
-        //     sassDir: './public/css',
-        //     cssDir: './dest'
-        // }))
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(sourcemaps.write('.'))

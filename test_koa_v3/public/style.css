@@ -2301,16 +2301,16 @@ img {
 .container .welcome span, .container .result span {font-family: 'Boogaloo', cursive;font-size: 8vw;text-shadow: 1px 1px 2px #000;
 }
 
-.container .result p {font-family: 'Boogaloo', sans-serif;font-size: 80px;text-shadow: 1px 1px 2px #000;
+.container .result p {font-family: 'Boogaloo', sans-serif;font-size: 6vw;text-shadow: 1px 1px 2px #000;
 }
 
-.container .result p span {font-family: 'Boogaloo', sans-serif;font-size: 80px;
+.container .result p span {font-family: 'Boogaloo', sans-serif;font-size: 6vw;
 }
 
-.container .result .title {font-size: 100px;
+.container .result .title span {font-size: 8vw;letter-spacing: 2px;text-shadow: 1px 1px 2px #f1ad39;
 }
 
-.container .topic {color: rgba(136, 82, 127, 1);margin-top: 54px;font-size: 80px;font-family: 'Boogaloo', cursive;text-shadow: 1px 1px 1px #030303;text-align: center;-webkit-animation-delay: 0.5s;animation-delay: 0.5s;
+.container .topic {color: rgba(136, 82, 127, 1);margin-top: 30px;font-size: 80px;font-family: 'Boogaloo', cursive;text-shadow: 1px 1px 1px #030303;text-align: center;-webkit-animation-delay: 0.5s;animation-delay: 0.5s;
 }
 
 .container .question-wrapper {width: 60%;margin: 20px auto 0;position: relative;
@@ -2415,7 +2415,7 @@ img {
 .container .question-wrapper .different-wrapper .defeat-wrapper .defeatCircle {width: 16%;height: 11%;border: 0.1px solid #000;border-radius: 50%;background-color: rgba(0, 0, 0, .5);position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;opacity: 0;visibility: hidden;
 }
 
-.container .question-wrapper .different-wrapper .defeat-wrapper .defeatCopy {display: inline-block;font-size: 0.4vw;text-shadow: 0.5px 0.5px 0.5px #000;position: relative;top: 49%;z-index: 99;
+.container .question-wrapper .different-wrapper .defeat-wrapper .defeatCopy, .container .question-wrapper .different-wrapper .defeat-wrapper .victoryCopy {display: inline-block;font-size: 0.4vw;text-shadow: 0.5px 0.5px 0.5px #000;position: absolute;top: 49%;left: 45%;z-index: 99;opacity: 0;visibility: hidden;
 }
 
 .container .question-wrapper .different-wrapper .targetItem {position: relative;cursor: pointer;// display: none;
@@ -2451,7 +2451,7 @@ img {
 .container .question-wrapper .different-wrapper .overlay p:nth-child(1) {top: 40%;
 }
 
-.container .question-wrapper .different-wrapper .overlay p:nth-child(2) {opacity: 0;top: 40%;color: rgb(254, 81, 81);
+.container .question-wrapper .different-wrapper .overlay p:nth-child(2) {opacity: 0;top: 37%;color: rgb(254, 81, 81);
 }
 
 .container .question-wrapper .different-wrapper .overlay:before, .container .question-wrapper .different-wrapper .overlay:after {content: '';position: absolute;top: 30px;right: 30px;bottom: 30px;left: 30px;opacity: 0;-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;transition: opacity 0.35s, -webkit-transform 0.35s;transition: opacity 0.35s, transform 0.35s;transition: opacity 0.35s, transform 0.35s, -webkit-transform 0.35s;cursor: pointer;
@@ -2465,10 +2465,10 @@ img {
 
 .container .question-wrapper .different-wrapper .overlay:hover p {}
 
-.container .question-wrapper .different-wrapper .overlay:hover p:nth-child(1) {top: 37%;
+.container .question-wrapper .different-wrapper .overlay:hover p:nth-child(1) {top: 35%;
 }
 
-.container .question-wrapper .different-wrapper .overlay:hover p:nth-child(2) {opacity: 1;top: 43%;
+.container .question-wrapper .different-wrapper .overlay:hover p:nth-child(2) {opacity: 1;top: 42%;
 }
 
 .container .question-wrapper .different-wrapper .overlay:hover:before, .container .question-wrapper .different-wrapper .overlay:hover:after {opacity: 1;-webkit-transform: scale(1);transform: scale(1);

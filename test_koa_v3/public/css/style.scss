@@ -225,23 +225,27 @@ img {
     .result {
         p {
             font-family: 'Boogaloo', sans-serif;
-            font-size: 80px;
+            font-size: 6vw;
             text-shadow: 1px 1px 2px #000;
 
             span {
                 font-family: 'Boogaloo', sans-serif;
-                font-size: 80px;
+                font-size: 6vw;
             }
         }
 
         .title {
-            font-size: 100px;
+            span {
+                font-size: 8vw;
+                letter-spacing: 2px;
+                text-shadow: 1px 1px 2px #f1ad39;
+            }
         }
     }
 
     .topic {
         color: rgba(136, 82, 127, 1);
-        margin-top: 54px;
+        margin-top: 30px;
         font-size: 80px;
         font-family: 'Boogaloo', cursive;
         text-shadow: 1px 1px 1px #030303;
@@ -469,13 +473,16 @@ img {
                     visibility: hidden;
                 }
 
-                .defeatCopy {
+                .defeatCopy,.victoryCopy {
                     display: inline-block;
                     font-size: 0.4vw;
                     text-shadow: 0.5px 0.5px 0.5px #000;
-                    position: relative;
+                    position: absolute;
                     top: 49%;
+                    left: 45%;
                     z-index: 99;
+                    opacity: 0;
+                    visibility: hidden;
                 }
             }
 
@@ -545,7 +552,7 @@ img {
                     }
                     &:nth-child(2) {
                         opacity: 0;
-                        top: 40%;
+                        top: 37%;
                         color: rgb(254, 81, 81);
                     }
                 }
@@ -577,11 +584,11 @@ img {
                 &:hover {
                     p {
                         &:nth-child(1) {
-                            top: 37%;
+                            top: 35%;
                         }
                         &:nth-child(2) {
                             opacity: 1;
-                            top: 43%;
+                            top: 42%;
                         }
                     }
                     &:before,&:after {

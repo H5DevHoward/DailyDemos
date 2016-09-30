@@ -12,7 +12,6 @@ const logger = require('koa-logger');
 const QAQ = [
     {
         Q: '1.Try to remember the numbers',
-        a: ['a.red', 'b.green', 'c.blue'],
         m: [
             {
                 title: 'Only one chance',
@@ -34,14 +33,15 @@ const QAQ = [
         persent: 0.4
     }, {
         Q: '2.Try to find all the differences in 30s',
-        a: ['a.green', 'b.blue', 'c.red'],
         m: ['img/product2_1.jpg', 'img/product2_2.jpg'],
         key: 5,
         persent: 0.3
     }, {
         Q: '3.Try to find all the differences in 30s',
         a: ['a.green', 'b.blue', 'c.red'],
-        m: ['img/product2_1.jpg', 'img/product2_2.jpg']
+        m: ['img/product2_1.jpg', 'img/product2_2.jpg'],
+        key: 5,
+        persent: 0.3
     }
 ];
 
@@ -69,7 +69,8 @@ const otherAccess = [
 ];
 
 const qAnswer = new Map();
-const scores = [];
+// const scores = [];
+const scores = new Map();
 
 
 app.use(serve(path.join(__dirname, 'public')));
@@ -113,39 +114,41 @@ router
         };
         yield next;
     })
-    .get('/check', function*(next) {
-        for(const [key, value] of qAnswer) {
-            console.log(key, value);
-        }
-    })
     .post('/save', koaBody, function*(next){
         let params = this.request.body;
         qAnswer.set(params.qIndex, params.answer);
 
         switch(params.qIndex) {
             case '1':
-                scores.push(question1Method(qAnswer.get('1')));
+                scores.set('1', question1Method(qAnswer.get('1')));
                 break;
             case '2':
-                scores.push(question2Method(qAnswer.get('2')));
+                scores.set('2', question2Method(qAnswer.get('2')));
                 break;
             case '3':
-                scores.push(0);
+                scores.set('3', 0);
                 break;
             default:
                 console.log('default');
         }
-        // console.log(scores);
 
-        yield this.render('/q', {
+        this.body = {
             answer: scores,
             layout: false
-        });
+        };
+        yield next;
     })
     .post('/result', koaBody, function*(next) {
-        console.log(qAnswer);
+        let result = [];
+        let sum = 0;
+        for(const [key, value] of scores) {
+            sum += value;
+            result.push(value);
+        }
+        result.push(sum);
+
         this.body = {
-            scrore: scores,
+            scrore: result,
             otherAccess: otherAccess[4]
         };
         yield next;
@@ -164,7 +167,9 @@ console.log('listening on port 3123');
 function question1Method(arr) {
     let key = QAQ[0].key.replace(/ /ig, '');
     let keyLen = key.length;
-    let input = arr[0].replace(/ /ig, '');
+    let input = arr[0];
+    let inputLen = input.length;
+    if(!inputLen) return 0;
     let len = Math.min(keyLen, input.length);
     let i = 0;
     for(; i < len; ++i) {
