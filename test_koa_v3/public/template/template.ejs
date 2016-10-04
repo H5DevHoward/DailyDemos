@@ -4,16 +4,16 @@
     <% if (otherAccess.qIndex != 4){ %>
         <p class="topic animated bounce">Quession: <%= otherAccess.qIndex %></p>
         <div class="question-wrapper">
-            <p class="title animated fadeIn"><%= QAQ.Q %></p>
+            <p class="title animated fadeIn"><%= config.question %></p>
             <% if (otherAccess.qIndex == 1){ %>
                 <div class="card-wrapper">
-                    <% for(var i=0; i<QAQ.m.length; i++) {%>
+                    <% for(var i=0; i<config.detail.length; i++) {%>
                         <div class="card animated zoomIn" data-flag="false">
                             <div class="front">
-                                <span><%= QAQ.m[i].title %>,&nbsp;</span><span><%= QAQ.m[i].timeout %>s</span>
+                                <span><%= config.detail[i].title %>,&nbsp;</span><span><%= config.detail[i].timeout %>s</span>
                             </div>
                             <div class="back">
-                                <span><%= QAQ.m[i].content %></span>
+                                <span><%= config.detail[i].content %></span>
                             </div>
                         </div>
                     <% } %>
@@ -26,9 +26,9 @@
                         <p>Are you ready ?</p>
                         <p>click to start</p>
                     </div>
-                    <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
+                    <div class="product origin preload" data-source=<%= config.detail[0] %>></div>
                     <div class="product target">
-                        <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
+                        <div class="targetItem preload" data-source=<%= config.detail[1] %>></div>
                         <% for(var i=0; i<5; i++) {%>
                             <div class="hotspot"></div>
                         <% } %>
@@ -49,24 +49,18 @@
                 </div>
 
             <% } else if (otherAccess.qIndex == 3){ %>
-                <div class="different-wrapper">
-                    <div class="overlay">
-                        <p>Are you ready ?</p>
-                        <p>click to start</p>
-                    </div>
-                    <div class="product origin preload" data-source=<%= QAQ.m[0] %>></div>
-                    <div class="product target">
-                        <div class="targetItem preload" data-source=<%= QAQ.m[1] %>></div>
-                        <% for(var i=0; i<5; i++) {%>
-                            <div class="hotspot"></div>
+                <% for(var i=0; i<config.detail.length; i++) {%>
+                    <div class="circle-wrapper">
+                        <% for(var j=0; j<config.detail[i].circle.length; j++) {%>
+                            <div class="circle animated zoomIn" style="background-color: <%= config.detail[i].circle[j] %>"></div>
+                        <% } %>
+                        <% if (i == config.detail.length-1){ %>
+                            <span class="animated fadeIn">=<input type="text" /></span>
+                        <% } else { %>
+                            <span class="animated fadeIn">=<%= config.detail[i].answer %></span>
                         <% } %>
                     </div>
-                    <div class="lamp-wrapper">
-                        <% for(var i=0; i<5; i++) {%>
-                            <div class="lamp"></div>
-                        <% } %>
-                    </div>
-                </div>
+                <% } %>
             <% } %>
         </div>
 

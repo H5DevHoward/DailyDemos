@@ -1,8 +1,8 @@
-### step1. 
+### step1.
 
 ##### 	 `$ npm install`
 
-##### 	desc:  install the dependency packages
+##### 	desc: install the dependency packages
 
 ### step2.
 
@@ -10,8 +10,8 @@
 
 ##### 	desc: run the server
 
-### step2. 
+### step2.
 
 ##### 	 `$ gulp`
 
-##### 	desc: preview 
+##### 	desc: preview

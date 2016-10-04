@@ -9,10 +9,10 @@ const router = require('koa-router')();
 const koaBody = require('koa-body')();
 const logger = require('koa-logger');
 
-const QAQ = [
+const CONFIG = [
     {
-        Q: '1.Try to remember the numbers',
-        m: [
+        question: '1.Try to remember the numbers (hover to see)',
+        detail: [
             {
                 title: 'Only one chance',
                 content: '3.14159 26535 89793 23846',
@@ -30,18 +30,46 @@ const QAQ = [
             }
         ],
         key: '3.14159 26535 89793 23846 26433 83279 50288 41971 69399 37510 58209 74944 59230 78164',
-        persent: 0.4
+        percent: 0.4
     }, {
-        Q: '2.Try to find all the differences in 30s',
-        m: ['img/product2_1.jpg', 'img/product2_2.jpg'],
+        question: '2.Try to find all the difference between the two pictures in 30s',
+        detail: ['img/product2_1.jpg', 'img/product2_2.jpg'],
         key: 5,
-        persent: 0.3
+        percent: 0.3
     }, {
-        Q: '3.Try to find all the differences in 30s',
-        a: ['a.green', 'b.blue', 'c.red'],
-        m: ['img/product2_1.jpg', 'img/product2_2.jpg'],
-        key: 5,
-        persent: 0.3
+        question: '3.Try to guess the answer',
+        detail: [
+            {
+                circle: ['#000', '#000', '#000', '#000', '#000'],
+                answer: '1'
+            },
+            {
+                circle: ['#000', '#000', '#000', '#000', '#fff'],
+                answer: '2'
+            },
+            {
+                circle: ['#000', '#000', '#000', '#fff', '#000'],
+                answer: '3'
+            },
+            {
+                circle: ['#000', '#000', '#000', '#fff', '#fff'],
+                answer: '4'
+            },
+            {
+                circle: ['#000', '#000', '#fff', '#000', '#000'],
+                answer: '5'
+            },
+            {
+                circle: ['#000', '#000', '#fff', '#000', '#fff'],
+                answer: '6'
+            },
+            {
+                circle: ['#000', '#fff', '#000', '#000', '#fff'],
+                answer: '?'
+            }
+        ],
+        key: 10,
+        percent: 0.3
     }
 ];
 
@@ -87,28 +115,28 @@ render(app, {
 router
     .get('/', function*(next) {
         yield this.render('home', {
-            QAQ: QAQ,
+            config: CONFIG,
             otherAccess: otherAccess[0],
             layout: '__layout'
         });
     })
     .post('/q1', koaBody, function*(next) {
         this.body = {
-            QAQ: QAQ[0],
+            config: CONFIG[0],
             otherAccess: otherAccess[1]
         };
         yield next;
     })
     .post('/q2', koaBody, function*(next) {
         this.body = {
-            QAQ: QAQ[1],
+            config: CONFIG[1],
             otherAccess: otherAccess[2]
         };
         yield next;
     })
     .post('/q3', koaBody, function*(next) {
         this.body = {
-            QAQ: QAQ[2],
+            config: CONFIG[2],
             otherAccess: otherAccess[3]
         };
         yield next;
@@ -125,7 +153,7 @@ router
                 scores.set('2', question2Method(qAnswer.get('2')));
                 break;
             case '3':
-                scores.set('3', 0);
+                scores.set('3', question3Method(qAnswer.get('3')));
                 break;
             default:
                 console.log('default');
@@ -164,7 +192,7 @@ console.log('listening on port 3123');
 
 
 function question1Method(arr) {
-    let key = QAQ[0].key.replace(/ /ig, '');
+    let key = CONFIG[0].key.replace(/ /ig, '');
     let keyLen = key.length;
     let input = arr[0];
     let inputLen = input.length;
@@ -176,9 +204,13 @@ function question1Method(arr) {
           break;
         }
     }
-    return Math.round(100 / keyLen * i * QAQ[0].persent);
+    return Math.round(100 / keyLen * i * CONFIG[0].percent);
 }
 
 function question2Method(arr) {
-    return Math.round(100 / 5 * arr[0] * QAQ[1].persent);
+    return Math.round(100 / 5 * arr[0] * CONFIG[1].percent);
+}
+
+function question3Method(arr) {
+    return arr[0] == CONFIG[2].key ? 30 : 0;
 }
