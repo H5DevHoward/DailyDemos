@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>Demo</title>
+    <style>
+        input {
+            display: none;
+        }
+
+        .box {
+            display: block;
+        }
+
+        input:not(checked)+.box {
+            background-color: blue;
+        }
+
+        input:checked+.box {
+            background-color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <label class="box">
+        <input type='checkbox'>
+        <div class="box">
+            toggle background-color
+        </div>
+    </label>
+    <div class="dv">
+        <p></p>
+    </div>
+    <div class="dv"></div>
+    <div class="dv"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
