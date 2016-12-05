@@ -1,5 +1,6 @@
 'use strict';
 
+import 'babel-polyfill';
 import fetchJsonp from 'fetch-jsonp';
 import $ from "jquery";
 

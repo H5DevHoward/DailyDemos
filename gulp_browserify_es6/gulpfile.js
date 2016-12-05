@@ -24,7 +24,10 @@ gulp.task('browserify-es6', function() {
         })
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(gulp.dest('./dev'));
+        .pipe(gulp.dest('./dev'))
+        .pipe(reload({
+            stream: true
+        }));
 });
 
 gulp.task('compile', function(cb) {
